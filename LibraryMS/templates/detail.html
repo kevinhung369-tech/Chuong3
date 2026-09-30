@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Chi tiết sách</h1>
+    <p>ID: {{ book.id }}</p>
+    <p>Tiêu đề: {{ book.title }}</p>
+    <p>Tác giả: {{ book.author }}</p>
+    <p>Năm xuất bản: {{ book.year }}</p>
+    <p>Thể loại: {{ book.category }}</p>
+    <p>Trạng thái: {{ 'Sẵn sàng' if book.available else 'Đã mượn' }}</p>
+{% endblock %}

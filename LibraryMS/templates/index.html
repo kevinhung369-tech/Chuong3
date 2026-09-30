@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="text-center py-5">
+        <h1 class="display-5 fw-bold text-primary mb-4">Thống kê Thư viện</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card text-bg-info mb-3 shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Tổng số đầu sách</h5>
+                        <p class="display-4">{{ total }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-bg-success mb-3 shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Sẵn sàng cho mượn</h5>
+                        <p class="display-4">{{ available }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

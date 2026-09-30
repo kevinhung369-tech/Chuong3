@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="mb-4 text-center border-bottom pb-2">Danh mục sách</h2>
+    
+    <!-- Thanh lọc thể loại -->
+    <div class="mb-4 text-center">
+        <strong class="me-2">Lọc theo thể loại: </strong>
+        <a href="{{ url_for('list_books') }}" class="btn btn-outline-secondary btn-sm rounded-pill">Tất cả</a>
+        {% for cat in categories %}
+            <a href="{{ url_for('list_books', category=cat) }}" class="btn btn-outline-primary btn-sm rounded-pill ms-1">{{ cat }}</a>
+        {% endfor %}
+    </div>
+    
+    <!-- Bảng dữ liệu -->
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th>Tên sách</th>
+                    <th>Tác giả</th>
+                    <th class="text-center">Năm</th>
+                    <th>Thể loại</th>
+                    <th class="text-center">Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td class="text-center">{{ book.id }}</td>
+                    <td><a href="{{ url_for('book_detail', book_id=book.id) }}" class="text-decoration-none fw-bold">{{ book.title }}</a></td>
+                    <td>{{ book.author }}</td>
+                    <td class="text-center">{{ book.year }}</td>
+                    <td><span class="badge bg-secondary">{{ book.category }}</span></td>
+                    <td class="text-center">
+                        {% if book.available %}
+                            <span class="badge bg-success">Có sẵn</span>
+                        {% else %}
+                            <span class="badge bg-danger">Đã mượn</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
