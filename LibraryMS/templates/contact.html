@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Liên hệ{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0 rounded-4 p-4">
+    <h2 class="fw-bold text-primary mb-3">Thông tin liên hệ</h2>
+    <p class="fs-5"><strong>Địa chỉ:</strong> {{ shop.address }}</p>
+    <p class="fs-5"><strong>Điện thoại:</strong> {{ shop.phone }}</p>
+</div>
+{% endblock %}

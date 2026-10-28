@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block title %}Thực đơn{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="fw-bold text-primary mb-4">Thực đơn (Trang {{ page }} / {{ pages }})</h2>
+
+    {% if items %}
+        <!-- Danh sách món dạng Grid Cards -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for item in items %}
+                <div class="col">
+                    {{ macros.item_card(item) }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Thanh phân trang sử dụng Macro -->
+        {{ macros.pagination(page, pages, 'show_menu') }}
+    {% else %}
+        <p class="text-muted">Không có món nào trên trang này.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,24 +1,45 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% block title %}Trang chủ{% endblock %}
+
 {% block content %}
-    <div class="text-center py-5">
-        <h1 class="display-5 fw-bold text-primary mb-4">Thống kê Thư viện</h1>
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="card text-bg-info mb-3 shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">Tổng số đầu sách</h5>
-                        <p class="display-4">{{ total }}</p>
-                    </div>
-                </div>
+<div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4">
+    <div class="card-header bg-primary text-white text-center py-4">
+        <h2 class="h3 fw-bold mb-1">{{ shop.name }}</h2>
+        <p class="mb-0 text-white-50"><i class="bi bi-geo-alt-fill me-1"></i>{{ shop.address }}</p>
+    </div>
+    
+    <div class="card-body p-4">
+        <div class="d-flex align-items-center justify-content-between p-3 bg-body-tertiary rounded-3 mb-4">
+            <div>
+                <small class="text-muted d-block">Giờ mở cửa</small>
+                <strong>{{ shop.open }}h00 - {{ shop.close }}h00</strong>
             </div>
-            <div class="col-md-4">
-                <div class="card text-bg-success mb-3 shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">Sẵn sàng cho mượn</h5>
-                        <p class="display-4">{{ available }}</p>
-                    </div>
-                </div>
+            <div>
+                <small class="text-muted d-block text-end">Bây giờ: {{ current_hour }}h</small>
+                {% if is_open %}
+                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-2">Đang mở cửa</span>
+                {% else %}
+                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-3 py-2">Đã đóng cửa</span>
+                {% endif %}
             </div>
         </div>
+
+        <h5 class="fw-bold mb-3"><i class="bi bi-gift-fill text-danger me-2"></i>Chương trình khuyến mãi</h5>
+        {% if promotions and promotions|length > 0 %}
+            <div class="list-group list-group-flush">
+                {% for promo in promotions %}
+                    <div class="list-group-item bg-transparent px-0 d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                        <span>{{ promo }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-secondary text-center mb-0" role="alert">
+                Hiện chưa có khuyến mãi.
+            </div>
+        {% endif %}
     </div>
+</div>
 {% endblock %}

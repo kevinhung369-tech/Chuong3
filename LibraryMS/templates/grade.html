@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 2: Tính điểm học phần</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f6f9; }
+        .grade-card {
+            max-width: 480px;
+            margin: 50px auto;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card grade-card">
+        <div class="card-header bg-success text-white text-center py-3 rounded-top">
+            <h4 class="mb-0 fw-bold">TÍNH ĐIỂM HỌC PHẦN</h4>
+        </div>
+        
+        <div class="card-body p-4">
+            <form action="/" method="POST" novalidate>
+                
+                <!-- Điểm Chuyên cần -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Điểm Chuyên cần - CC (10%)</label>
+                    <input type="text" name="cc" value="{{ cc }}" 
+                           class="form-control {% if error_cc %}is-invalid{% endif %}" 
+                           placeholder="Nhập điểm từ 0 đến 10">
+                    {% if error_cc %}
+                        <div class="invalid-feedback d-block">{{ error_cc }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Điểm Giữa kỳ -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Điểm Giữa kỳ - GK (30%)</label>
+                    <input type="text" name="gk" value="{{ gk }}" 
+                           class="form-control {% if error_gk %}is-invalid{% endif %}" 
+                           placeholder="Nhập điểm từ 0 đến 10">
+                    {% if error_gk %}
+                        <div class="invalid-feedback d-block">{{ error_gk }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Điểm Cuối kỳ -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Điểm Cuối kỳ - CK (60%)</label>
+                    <input type="text" name="ck" value="{{ ck }}" 
+                           class="form-control {% if error_ck %}is-invalid{% endif %}" 
+                           placeholder="Nhập điểm từ 0 đến 10">
+                    {% if error_ck %}
+                        <div class="invalid-feedback d-block">{{ error_ck }}</div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 fw-bold py-2 shadow-sm">
+                    TÍNH ĐIỂM
+                </button>
+            </form>
+
+            <!-- Kết quả mong đợi -->
+            {% if result %}
+                <div class="alert alert-primary mt-4 mb-0 text-center" role="alert">
+                    <small class="text-uppercase text-muted d-block mb-1">Kết quả học phần</small>
+                    <span class="fs-4 fw-bold text-primary">{{ result }}</span>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

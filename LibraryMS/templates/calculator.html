@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 1: Máy tính cơ bản</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+        .calculator-card {
+            max-width: 480px;
+            margin: 50px auto;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card calculator-card">
+        <div class="card-header bg-primary text-white text-center py-3 rounded-top">
+            <h4 class="mb-0 fw-bold">MÁY TÍNH CƠ BẢN</h4>
+        </div>
+        
+        <div class="card-body p-4">
+            <!-- Form gửi POST về cùng URL -->
+            <form action="/" method="POST" novalidate>
+                
+                <!-- Số thứ nhất a -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Số thứ nhất (a)</label>
+                    <input type="text" 
+                           name="a" 
+                           value="{{ a }}" 
+                           class="form-control {% if error_a %}is-invalid{% endif %}" 
+                           placeholder="Nhập số a (ví dụ: 5 hoặc 2,5)">
+                    {% if error_a %}
+                        <div class="invalid-feedback d-block">{{ error_a }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Phép toán op -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Phép toán (op)</label>
+                    <select name="op" class="form-select">
+                        <option value="+" {% if op == '+' %}selected{% endif %}>+ (Cộng)</option>
+                        <option value="-" {% if op == '-' %}selected{% endif %}>- (Trừ)</option>
+                        <option value="*" {% if op == '*' %}selected{% endif %}>* (Nhân)</option>
+                        <option value="/" {% if op == '/' %}selected{% endif %}>/ (Chia)</option>
+                    </select>
+                </div>
+
+                <!-- Số thứ hai b -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Số thứ hai (b)</label>
+                    <input type="text" 
+                           name="b" 
+                           value="{{ b }}" 
+                           class="form-control {% if error_b %}is-invalid{% endif %}" 
+                           placeholder="Nhập số b (ví dụ: 3)">
+                    {% if error_b %}
+                        <div class="invalid-feedback d-block">{{ error_b }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Nút bấm Tính -->
+                <button type="submit" class="btn btn-primary w-100 fw-bold py-2 shadow-sm">
+                    TÍNH KẾT QUẢ
+                </button>
+            </form>
+
+            <!-- Khối hiển thị lỗi chung (phép toán không hợp lệ,...) -->
+            {% if error_general %}
+                <div class="alert alert-danger mt-3 mb-0 text-center fw-semibold" role="alert">
+                    {{ error_general }}
+                </div>
+            {% endif %}
+
+            <!-- Khối hiển thị kết quả -->
+            {% if result %}
+                <div class="alert alert-success mt-4 mb-0 text-center" role="alert">
+                    <small class="text-uppercase text-muted d-block mb-1">Kết quả</small>
+                    <span class="fs-4 fw-bold text-success">{{ result }}</span>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
